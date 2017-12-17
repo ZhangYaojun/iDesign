@@ -181,14 +181,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                     </div>
                 </li>
-                <li class="grid"><a  href="#">	其他工艺品</a>
+               <li><a  href="#">其他工艺品</a>
                     <div class="mepanel">
                         <div class="row">
                             <div class="col1">
                                 <div class="h_nav">
                                     <h4>手办</h4>
                                     <ul>
-                                        {% for ca in category_list_f %}
+                                        {% for ca in category_list_m %}
                                             {% if ca.typ == '手办' %}
                                                 <li><a href="{% url 'products' %}?cid={{ ca.id }}">{{ ca.name }}</a></li>
                                             {% endif %}
@@ -200,7 +200,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="h_nav">
                                     <h4>周边</h4>
                                     <ul>
-                                        {% for ca in category_list_f %}
+                                        {% for ca in category_list_m %}
                                             {% if ca.typ == '周边' %}
                                                 <li><a href="{% url 'products' %}?cid={{ ca.id }}">{{ ca.name }}</a></li>
                                             {% endif %}
@@ -208,6 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </li>
