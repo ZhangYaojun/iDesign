@@ -1,4 +1,4 @@
-# storeproject
+# I-Design
 i定制平台设计
 
 ##实现功能
