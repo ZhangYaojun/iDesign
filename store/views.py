@@ -27,10 +27,12 @@ def global_setting(request):
     #站点信息
     MEDIA_URL = settings.MEDIA_URL
     category_list = Category.objects.all()
-    #男装分类信息
+    #传统工艺品分类信息
     category_list_m = [c for c in category_list if c.sex == 0]
-    #女装分类信息
+    #现代工艺品分类信息
     category_list_f = [c for c in category_list if c.sex == 1]
+    #其他工艺品分类信息
+    category_list_o = [c for c in category_list if c.sex == 2]
     #品牌信息
     brand_list = Brand.objects.all()
     #热销榜
@@ -222,3 +224,24 @@ def getPage(request,clo_list):
     except (EmptyPage,InvalidPage,PageNotAnInteger):
         clo_list = paginator.page(1)
     return clo_list
+
+
+#订单界面
+def getOrder(request):
+    try:
+        chid = request.POST.get('chid',None)
+        try:
+            clothing = Clothing.objects.get(pk=chid)
+        except Clothing.DoesNotExist:
+            return render(request, 'error.html', {'reason':'商品不存在'})
+        order = request.session.get(request.user.id,None)
+        if not order:
+            order = Order()
+            order.add(clothing)
+            request.session[request.user.id] = order
+        else:
+            order.add(clothing)
+            request.session[request.user.id] = order
+    except Exception as e:
+        logger.error(e)
+    return render(request, 'order.html', locals())

@@ -45,7 +45,12 @@ class Category(models.Model):
         ordering = ['index','id']
 
     def __str__(self):
-        str = "传统工艺品" if self.sex == 0 else "现代工艺品" if self.sex == 1 else "其他工艺品"
+        if self.sex == 0:
+            str = "传统工艺品"
+        elif self.sex == 1:
+            str = "现代工艺品"
+        elif self.sex == 2:
+            str = "其他工艺品"
         return self.name + "---" + str
 
 #品牌
@@ -127,6 +132,22 @@ class Caritem(models.Model):
 
 #购物车
 class Cart(object):
+    def __init__(self):
+        self.items = []
+        self.total_price = 0.0
+
+    def add(self, clothing):
+        self.total_price += clothing.new_price
+        for item in self.items:
+            if item.clothing.id == clothing.id:
+                item.quantity += 1
+                item.sum_price += clothing.new_price
+                return
+        else:
+            self.items.append(Caritem(clothing=clothing, quantity=1, sum_price=clothing.new_price))
+            
+#订单       
+class Order(object):
     def __init__(self):
         self.items = []
         self.total_price = 0.0

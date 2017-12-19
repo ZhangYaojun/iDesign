@@ -3,14 +3,13 @@
 {% block content_block %}
 <div class="container">
 	<div class="check-out">
-		<h1>购物车</h1>
+		<h1>已下达订单</h1>
     	  <table >
 		  <tr>
-			<th>商品</th>
+			<th>名称</th>
 			<th>数量</th>
-			<th></th>
-           <th></th>
-			<th>价格</th>
+			<th>基础价格</th>
+           <th>备注</th>
 		  </tr>
           {% for item in cart.items %}
 		  <tr>
@@ -21,9 +20,8 @@
 			</div>
 			<div class="clearfix"> </div></td>
 			<td class="check"><input type="text" value="{{ item.quantity }}" readonly="readonly"></td>
-			<td></td>
-			<td></td>
-			<td>{{ item.sum_price }}元</td>
+			<td>{{item.sum_price }}元</td>
+           <td></td>
 		  </tr>
           {% endfor %}
           <tr>
@@ -31,7 +29,7 @@
           &nbsp;&nbsp;&nbsp;总价：{{ cart.total_price }}元</td>
           </tr>
 	</table>
-{#	<a href="#" class=" to-buy">去结算</a>#}
+{#	<a href="#" class=" to-buy">订单完成</a>#}
 	<div class="clearfix"> </div>
     </div>
 </div>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="order">
+<div class="container">
+<div class="content-top">
+<h1 style="text-align:center">下订单</h1>
+<table>
+<form action="{% url 'add_cart'%}" method="post" id="subform{{ clo.id }}">
+{% csrf_token %}
+{% for clo in clo_list %}
+<div class="col-md-3 col-md2">
+<div class="col-md1 simpleCart_shelfItem">
+{% endfor %}
+{% for item in cart.items %}
+<tr>
+<td class="ring-in">
+<a href="{% url 'detail' %}?did={{ item.clothing.id }}" class="at-in">
+<img src="{{ MEDIA_URL }}{{ item.clothing.image_url_c }}" class="" height='200' width='200' alt="" style="margin-left:200px;">
+</a></td>
+<div class="sed"></div>				
+<div class="clearfix"> </div>
+<td><h5 style="font-size:50px;color:skyblue;">名称：{{ item.clothing.name }}</h5></td>
+</tr>
+<tr><td></td><td><p style="font-size:30px;color:skyblue;">描述：{{ item.clothing.desc }}</p></td><td></td></tr>
+<tr>
+<td class="check" style="font-size:30px;color:skyblue;margin-left:200px;position:relative;left:200px">数量：
+<input class="check" name="goodnum"  type="text" value="{{ item.quantity }}" readonly="readonly" style="width:100px;"/>
+</td>
+<td style="font-size:30px;color:skyblue;">价格：{{item.sum_price }}元</td>
+</tr>
+{% endfor %}
+<tr><td><p style="font-size:28px;margin-left:200px;color:skyblue;">备注：</P><input style="position:absolute;left:860px;width:500px"></input></td>
+</tr>        
+</table>
+<tr>
+<a href="{% url 'view_cart' %}"  class="item_add" style="margin-left:550px;">订单确认</a>
+<div class="clearfix"> </div>
+</tr>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

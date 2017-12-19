@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^add_cart/$', add_cart, name='add_cart'),
     url(r'^clean_cart/$', cleanCart, name='clean_cart'),
     url(r'^brands/$', brands, name='brands'),
-    url(r'discount/$', getDiscount, name='discount')
+    url(r'discount/$', getDiscount, name='discount'),
+    url(r'order/$', getOrder, name='order')
 ]
